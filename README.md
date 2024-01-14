@@ -9,6 +9,6 @@ chmod +x install-docker.sh
 ```
 Then run it with:
 ```
-./install_docker.sh
+./install-gitdocker.sh
 ```
 
