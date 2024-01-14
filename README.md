@@ -79,3 +79,53 @@ Run docker-compose file as :
 docker-compose up --build 
 ```
 ___
+**Task 4:** Install Jenkins. Install necessary plugins. Create a freestyle project for building a CI/CD pipeline for the above application which will build artifacts using a docker file directly from your GitHub repo. 
+___
+Installing Jenkins:
+-  Jenkins requires Java to run, so install java first
+```
+sudo apt update
+sudo apt install fontconfig openjdk-17-jre
+java -version
+openjdk version "17.0.8" 2023-07-18
+OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+```
+- Now install Jenkins:
+```
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+```
+- Starting and checking jenkins installation:
+```
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+#To check whether jenkis is running or not
+sudo systemctl status jenkins
+```
+Jenkins is available on http://localhost:8080/.
+
+-Configure Jenkins as:
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+- Initial password could be accessed from the given location.
+- Copy the password and Login into Jenkins.
+
+**Building CI/CD with Jenkins:**
+- Click on `New item` and select `Freestyle` Project
+- On General click on Github Project(copy the url of the repository)
+- Click on Git on Source Code Management and copy url of the repository.
+- On Build Triggers click on Poll Scm and set a cron job for it.( I set it as "* * * * *" which states Jenkins will send request on Git every minute to check whether there is any commit).
+- On Build Steps click on Add build steps and click on Execute Shell and write the command to build the docker file.
+```
+docker compose up --build
+```
+- Click on Save 
+- Check on dashboard of the job is failed or passed.
+- Check Build status on Git Polling log
