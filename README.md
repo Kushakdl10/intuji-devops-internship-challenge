@@ -11,17 +11,16 @@ Then run it with:
 ```
 ./install-docker.sh
 ```
-
-er.sh
-```
 ___
 
-Task 2: Clone the GitHub repository (https://github.com/silarhi/php-hello-world.git).
-2.1 Create your Dockerfile for building a docker image of the above application. Your docker image should run any web application (nginx, apache, httpd).
- 2.2 Push your docker image to the docker hub.
+**Task 2:** Clone the GitHub repository (https://github.com/silarhi/php-hello-world.git).
+- 2.1 Create your Dockerfile for building a docker image of the above application. Your docker image should run any web application (nginx, apache, httpd).
+- 2.2 Push your docker image to the docker hub.
 ___
 Docker file that helps to build the docker image to run the given application.
 For this application, I have added all the files which is on given repo to this repo for creating image.
+
+`Dockerfile:`
 ```
 FROM php:7.4-apache
 WORKDIR /var/www/html
