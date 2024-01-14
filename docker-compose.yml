@@ -1,0 +1,13 @@
+version: '3'
+services:
+  php-apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:80"
+    networks:
+      - php_network
+networks:
+  php_network:
+    driver: bridge
